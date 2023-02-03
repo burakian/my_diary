@@ -1,0 +1,33 @@
+{% extends "diary/base.html" %}
+{% block content%}
+<h1>投稿リスト</h1>
+<table class="table">
+<thead>
+    <tr>
+        <th>タイトル</th>
+        <th>日付</th>
+        <th> </th>
+        <th> </th>
+    </tr>
+
+</thead>
+<tbody>
+    {% for day in day_list%}
+    <tr>
+        <td><a href="{% url 'diary:detail' day.pk %}">{{day.title}}</a></td>
+        <td>{{day.date}}</td>
+        {% if user.is_superuser%}
+        <td><a href="{% url 'diary:update' day.pk %}">更新</a></td>
+        <td><a href="{% url 'diary:delete' day.pk %}">削除</a></td>
+        {%endif%}
+
+    </tr>
+    {%endfor%}
+    <tr>
+        <td></td>
+    </tr>
+</tbody>
+</table>
+{% include "diary/page2.html"%}
+<div><a href= "{% url 'admin:index'%}">ログイン画面</a>
+</div>{% endblock%}
