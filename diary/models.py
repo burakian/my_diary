@@ -3,8 +3,10 @@ from django.utils import timezone
 
 class Day(models.Model):
     title=models.CharField("タイトル",max_length=200)
-    text=models.TextField("本文",default="本文を入力してください")
+    text=models.TextField("本文")
     date=models.DateTimeField("日付",default=timezone.now)
+    # image=models.ImageField("画像",upload_to="img/upload")
+
 # Create your models here.
     def __str__(self):
         return self.title

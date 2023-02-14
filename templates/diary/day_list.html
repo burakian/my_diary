@@ -1,0 +1,82 @@
+{% extends "diary/base.html" %}
+{% block content%}
+<h1>こちらは日報一覧です</h1>
+<div class="mt-3 d-flex justify-content-end">
+  <a href={% url "diary:add" %} class="btn btn-outline-primary float-right">
+    <i class="bi bi-plus"></i>
+  </a>
+</div>
+{% for day in day_list %}
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href={% url  'diary:detail' day.pk %}>
+                {{ day.title}}
+            </a>:投稿日:
+            <th class="mt-3 d-flex justify-content-end">{{day.date}}</th>
+        </h5>
+        <a type="button" class="btn btn-primary btn-sm" href={% url 'diary:update' day.pk %} >
+            編集
+        </a>
+        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{day.pk}}">削除</button>
+        {% include "diary/day_confirm_delete.html" %}
+
+    </div> 
+</div>
+{% endfor %}
+</div>
+<tr>
+    <td></td>
+</tr>
+<div class="container">
+
+{% include "diary/page2.html"%}
+<p>
+<a href= "{% url 'admin:index'%}">ログイン画面</a>
+</p>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <h1>投稿リスト</h1>
+<table class="table">
+<thead>
+    <tr>
+        <th>タイトル</th>
+        <th>日付</th>
+        <th> </th>
+        <th> </th>
+    </tr>
+
+</thead>
+<tbody>
+    {% for day in day_list%}
+    <tr>
+        <td><a href="{% url 'diary:detail' day.pk %}">{{day.title}}</a></td>
+        <td>{{day.date}}</td>
+        {% if user.is_superuser%}
+        <td><a href="{% url 'diary:update' day.pk %}">更新</a></td>
+        <td><a href="{% url 'diary:delete' day.pk %}">削除</a></td>
+        {%endif%}
+
+    </tr>
+    {%endfor%}
+    <tr>
+        <td></td>
+    </tr>
+</tbody>
+</table>
+{% include "diary/page2.html"%}
+<div><a href= "{% url 'admin:index'%}">ログイン画面</a>
+</div>{% endblock%} {% endcomment %}

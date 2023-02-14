@@ -2,7 +2,7 @@
 
 {% block content %}
 <p>{{day.title}}></p>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     <table class="table">
         <tr>
             <th>タイトル</th>
@@ -17,9 +17,13 @@
             <th>日付</th>
             <th>{{form.date}}</th>
         </tr>
+        <!-- <tr>
+            <th>写真</th>
+            <th>{{form.image}}</th>
+        </tr> -->
     </table>
     
-<button type="submit">ポチンキ</button>
+<button class="btn btn-primary" type="submit">ポチンキ</button>
 {% csrf_token %}
 </form>
 {%endblock%}
